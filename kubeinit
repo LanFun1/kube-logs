@@ -66,6 +66,3 @@ kubectl apply -f custom-resources.yaml
 # get worker node commands to run to join additional nodes into cluster
 kubeadm token create --print-join-command
 
-
-## ONLY ON WORKER nodes
-Run the command from the token create output above
