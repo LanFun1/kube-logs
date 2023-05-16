@@ -27,4 +27,6 @@ sudo openvpn --config /root/client-01.ovpn(or your path to ovpn file) --daemon
 systemctl status openvpn@client-01
 then try again helm install
 5) install fluent bit
+helm repo add fluent https://fluent.github.io/helm-charts
+helm repo update
 helm install fluent-bit fluent/fluent-bit -f fluentvalues.yaml
