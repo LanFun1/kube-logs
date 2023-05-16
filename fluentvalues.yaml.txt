@@ -1,0 +1,27 @@
+backend:
+  type: es
+  es:
+    host: "elasticsearch-master"(addrs)
+    port: 9200
+
+fluent-bit:
+  enabled: true
+  readinessProbe:
+    initialDelaySeconds: 120
+  config:
+    outputs: |
+      [OUTPUT]
+          Name es
+          Match kube.*
+          Host elasticsearch-master(address)
+          Logstash_Format On
+          Retry_Limit False
+          Replace_Dots On
+      [OUTPUT]
+          Name es
+          Match host.*
+          Host elasticsearch-master(addr)
+          Logstash_Format On
+          Logstash_Prefix node
+          Retry_Limit False
+          Replace_Dots On
