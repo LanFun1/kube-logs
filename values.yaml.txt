@@ -1,0 +1,27 @@
+antiAffinity: "soft"
+replicas: 1
+
+readinessProbe:
+  failureThreshold: 3
+  initialDelaySeconds: 200  # Измените значение initialDelaySeconds на 200
+  periodSeconds: 10
+  successThreshold: 3
+  timeoutSeconds: 5
+
+extraEnvs:
+  - name: ELASTIC_PASSWORD
+    value: elastic
+  - name: ELASTIC_USERNAME
+    value: elastic
+
+persistence:
+  enabled: false
+  storageClass: "slow"
+  accessModes:
+    - ReadWriteOnce
+  size: 10Gi
+
+tolerations:
+  - key: "node-role.kubernetes.io/control-plane"
+    operator: "Exists"
+    effect: "NoSchedule"
