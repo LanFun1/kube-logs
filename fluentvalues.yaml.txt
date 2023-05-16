@@ -1,0 +1,38 @@
+backend:
+  type: es
+  es:
+    host: 10.98.247.27
+    port: 9200
+
+fluent-bit:
+  enabled: true
+  readinessProbe:
+    initialDelaySeconds: 120
+  config:
+    outputs: |
+      [INPUT]
+          Name tail
+          Path /var/log/containers/*.log
+          Parser cri
+          Tag kube.*
+          Mem_Buf_Limit 5MB
+          Skip_Long_Lines On
+      [OUTPUT]
+          Name es
+          Match kube.*
+          Host 10.98.247.27
+          Logstash_Format On
+          Retry_Limit False
+          Replace_Dots On
+          Trace_Error On
+          Trace_Output On
+      [OUTPUT]
+          Name es
+          Match host.*
+          Host 10.98.247.27
+          Logstash_Format On
+          Logstash_Prefix node
+          Retry_Limit False
+          Replace_Dots On
+          Trace_Error On
+          Trace_Output On
