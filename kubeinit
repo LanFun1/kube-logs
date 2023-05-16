@@ -54,7 +54,7 @@ free -m
 ### ONLY ON CONTROL NODE .. control plane install:
 kubeadm init --pod-network-cidr 10.10.0.0/16 --kubernetes-version 1.26.1 --node-name k8s-control
 
-as a user.
+as a user write lines from mkdir in output.
 
 # add Calico 3.25 CNI 
 ### https://docs.tigera.io/calico/3.25/getting-started/kubernetes/quickstart
